@@ -1,0 +1,40 @@
+// Optional persistence for enquiries. Set DATABASE_URL (PostgreSQL) and run
+// `npx prisma migrate deploy` (or `npx prisma db push`) to enable it.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EnquiryKind {
+  ROOM
+  BANQUET
+  CONTACT
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
+
+model Enquiry {
+  id        String        @id @default(cuid())
+  kind      EnquiryKind
+  status    EnquiryStatus @default(NEW)
+  name      String
+  phone     String?
+  email     String
+  /// Full validated form submission.
+  details   Json
+  /// Whether the notification email to the hotel was sent successfully.
+  notified  Boolean       @default(false)
+  createdAt DateTime      @default(now())
+
+  @@index([kind, createdAt])
+  @@index([status])
+}
