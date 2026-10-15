@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
 import { ScrollRefresh } from "@/components/motion/ScrollRefresh";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
+import { StartupHomeRedirect } from "@/components/motion/StartupHomeRedirect";
 import { hotel, siteUrl } from "@/content/site";
 import { hotelJsonLd } from "@/lib/structured-data";
 
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         </main>
         <Footer />
         <MobileActionBar />
+        <StartupHomeRedirect />
         <ScrollRefresh />
         <SmoothScroll />
       </body>
